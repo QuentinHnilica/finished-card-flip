@@ -6,10 +6,17 @@ var card2
 var background1
 var background2
 
+var pairsMet = 0
+
+var allOurbuttons = []
+var allOurBackground = []
+
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+
 
 function ResetVars(){
     card1 = null;
@@ -18,23 +25,55 @@ function ResetVars(){
     background2 = null;
     flipped = false;
 }
+
+function RevertToBeginning(){
+    ResetVars()
+    document.getElementById("Reset").style.visibility = "hidden"
+    document.getElementById("OurText").innerHTML = "Flip The Cards, Find Pairs!"
+    pairsMet = 0
+    for(i = 0; i<= 7; i++){
+        var buttonNum = i + 1
+        allOurbuttons[i] = document.getElementById("Button" + buttonNum)
+    }
+   
+    for(i = 0; i<= 7; i++){
+        var backNum = i + 1
+        allOurBackground[i] = "B" + backNum
+        allOurBackground[5]
+    }
+    for(i = 0; i <= allOurbuttons.length -1; i++){
+        allOurbuttons[i].style.display = "none";
+        allOurbuttons[i].style.visibility = "visible";
+        document.getElementById(allOurBackground[i]).style.visibility = "visible"
+    }
+    
+}
+
+
+function YouWin(){
+    document.getElementById("OurText").innerHTML = "You Have Won, Congrats!"
+    document.getElementById("Reset").style.visibility = "visible"
+}
   
 async function CheckSimilarities(){
     await sleep(1000);
     if(card1.alt == card2.alt){
-       console.log("Yes They Are the Same");
+        pairsMet += 1;
        card1.style.visibility = "hidden";
        card2.style.visibility = "hidden";
        background1.style.visibility = "hidden";
        background2.style.visibility = "hidden";
-       ResetVars();
-
+        if (pairsMet >= 4){
+            YouWin();
+        }
+        else{
+            ResetVars();
+        }
     }
     else
     {
-        console.log("They are not the same");
-        card1.style.visibility = "hidden";
-        card2.style.visibility = "hidden";
+        card1.style.display = "none";
+        card2.style.display = "none";
         ResetVars();
     }
 }

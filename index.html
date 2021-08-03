@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <h1>Flip The Cards, Find Pairs!</h1>
+        <h1 id="OurText">Flip The Cards, Find Pairs!</h1>
     </header>
 
     <main>
@@ -39,8 +39,13 @@
             </li> 
             <li id="B8" onclick="button8()">
                 <img id="Button8" src="assets/Shiba.png" alt="Shiba" width="200"  />
-            </li>            
+            </li> 
+            
+            <button id="Reset" onclick="RevertToBeginning()">
+                Reset
+            </button>
         </ul>
+        
     </main>
 
     <script src="script.js"></script>
